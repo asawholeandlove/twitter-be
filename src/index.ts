@@ -1,11 +1,10 @@
+import { config } from 'dotenv'
 import express from 'express'
 import userRouter from '~/user.routes'
-const app = express()
-const port = 3000
+config()
 
-app.post('/', (req, res) => {
-  res.send('hello world')
-})
+const app = express()
+const port = process.env.PORT || 3001
 
 app.use('/user', userRouter)
 
