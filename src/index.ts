@@ -1,10 +1,14 @@
 import { config } from 'dotenv'
 import express from 'express'
 import userRouter from './routes/users.routes'
+import db from './services/database.services'
 config()
 
 const app = express()
 const port = process.env.PORT || 3001
+
+// connect to database
+db.connect()
 
 // middleware
 app.use(express.json())
