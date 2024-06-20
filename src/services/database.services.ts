@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 import { Collection, Db, MongoClient } from 'mongodb'
 import chalk from 'chalk'
 import User from '~/models/schemas/User.schema'
+import RefreshToken from '~/models/schemas/RefreshToken.schema'
 config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@twitter.ihoxoie.mongodb.net/?retryWrites=true&w=majority&appName=Twitter`
@@ -26,6 +27,10 @@ class DatabaseService {
 
   get users(): Collection<User> {
     return this.db.collection('users')
+  }
+
+  get refreshTokens(): Collection<RefreshToken> {
+    return this.db.collection('refresh-tokens')
   }
 }
 
