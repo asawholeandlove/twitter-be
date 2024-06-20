@@ -6,6 +6,7 @@ import { signToken } from '~/utils/jwt'
 import { TokenType } from '~/constants/enums'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
 import { ObjectId } from 'mongodb'
+import { USERS_MESSAGES } from '~/constants/messages'
 
 class UsersService {
   private signAccessToken(user_id: string) {
@@ -66,6 +67,13 @@ class UsersService {
   async checkEmailExists(email: string) {
     const result = await db.users.findOne({ email })
     return Boolean(result)
+  }
+
+  async logout(refresh_token: string) {
+    const result = await db.refreshTokens.deleteOne({ token: refresh_token })
+    return {
+      message: USERS_MESSAGES.LOGOUT_SUCCESS
+    }
   }
 }
 
