@@ -15,8 +15,7 @@ export const loginController = (req: Request, res: Response) => {
   })
 }
 
-export const registerController = async (req: Request, res: Response) => {
-  req.body
+export const registerController = async (req: Request, res: Response, next: any) => {
   const result = await usersService.register(req.body)
 
   return res.status(201).json({
